@@ -14,7 +14,9 @@ import {
   AlertTriangle,
   Menu,
   X,
-  BookOpen
+  BookOpen,
+  PanelLeftClose,
+  PanelLeft
 } from "lucide-react";
 import { LanguageCode } from "@/types";
 
@@ -60,10 +62,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, isSidebarOpen }
         <div className="flex items-center gap-3">
           <button
             onClick={onToggleSidebar}
-            className="lg:hidden p-2 text-slate-600 hover:text-gov-primary hover:bg-slate-100 rounded-lg"
-            aria-label="Toggle navigation menu"
+            className={`p-2 rounded-xl transition-all flex items-center justify-center border ${
+              isSidebarOpen
+                ? "bg-blue-50/80 text-gov-primary border-blue-200/80 shadow-xs"
+                : "text-slate-600 hover:text-gov-primary hover:bg-slate-100 border-slate-200/70"
+            }`}
+            title={isSidebarOpen ? "Close Navigation Suite (Ctrl+B)" : "Open Navigation Suite (Ctrl+B)"}
+            aria-label={isSidebarOpen ? "Close Navigation Suite" : "Open Navigation Suite"}
           >
-            {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isSidebarOpen ? (
+              <PanelLeftClose className="w-5 h-5 text-gov-primary" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
 
           <Link href="/" className="flex items-center gap-3 group">

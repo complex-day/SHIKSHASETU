@@ -69,6 +69,7 @@ interface AppState {
   bookmarkedColleges: string[];
   bookmarkedScholarships: string[];
   completedMilestones: string[];
+  isSidebarOpen: boolean;
 
   // Actions
   setRole: (role: UserRole) => void;
@@ -81,6 +82,8 @@ interface AppState {
   toggleBookmarkCollege: (id: string) => void;
   toggleBookmarkScholarship: (id: string) => void;
   toggleMilestone: (milestoneId: string) => void;
+  toggleSidebar: () => void;
+  setSidebarOpen: (isOpen: boolean) => void;
 }
 
 export const useAppStore = create<AppState>((set, get) => {
@@ -99,6 +102,7 @@ export const useAppStore = create<AppState>((set, get) => {
     bookmarkedColleges: ["nit_srinagar", "iit_jammu"],
     bookmarkedScholarships: ["pmsss_jk_2026", "mission_youth_parvaaz"],
     completedMilestones: ["m1"],
+    isSidebarOpen: true,
 
     setRole: (role) => set({ currentRole: role }),
     setLanguage: (lang) => {
@@ -165,6 +169,12 @@ export const useAppStore = create<AppState>((set, get) => {
           ? state.completedMilestones.filter((m) => m !== milestoneId)
           : [...state.completedMilestones, milestoneId],
       }));
+    },
+    toggleSidebar: () => {
+      set((state) => ({ isSidebarOpen: !state.isSidebarOpen }));
+    },
+    setSidebarOpen: (isOpen) => {
+      set({ isSidebarOpen: isOpen });
     },
   };
 });
